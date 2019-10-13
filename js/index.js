@@ -1,7 +1,6 @@
 $("#search").on ("click", function(e) {
 
 	e.preventDefault();
-
 	$("#videos").html("");
 
 	$.ajax({
@@ -13,7 +12,8 @@ $("#search").on ("click", function(e) {
 			q: 				$("#searchWord").val(),
 			key: 			"AIzaSyDmsC_ehX0v0e8mixzaStUoHhnVGGU5Ra0"
 		},
-		dataType: "jsonp",
+		dataType: "json",
+		
 		success: function(res) {
 			let response = res["items"];
 			response.forEach(element => {
@@ -32,14 +32,18 @@ $("#search").on ("click", function(e) {
 
 			if (res["prevPageToken"] != null) {
 				
-				let info = `<button id="prev${res["prevPageToken"]}" type="button" class="btn btn-danger">Previous</button>`;
+				let info = `<button id="prev${res["prevPageToken"]}" type="button" class="btn pageBtn btn-danger">Previous</button>`;
 				$("#videos").append(info);
 			}
 
 			if (res["nextPageToken"] != null) {
-				let info = `<button id="next${res["nextPageToken"]}" type="button" class="btn btn-danger">Next</button>`;
+				let info = `<button id="next${res["nextPageToken"]}" type="button" class="btn pageBtn btn-danger">Next</button>`;
 				$("#videos").append(info);
 			}
 		}
 	})	
 });
+
+$(".pageBtn")[1].on ("click", function(e) {
+	console.log("Click");
+})
