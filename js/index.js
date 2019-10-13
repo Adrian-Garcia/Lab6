@@ -29,6 +29,17 @@ $("#search").on ("click", function(e) {
 				`
 				$("#videos").append(info);
 			});
+
+			if (res["prevPageToken"] != null) {
+				
+				let info = `<button id="prev${res["prevPageToken"]}" type="button" class="btn btn-danger">Previous</button>`;
+				$("#videos").append(info);
+			}
+
+			if (res["nextPageToken"] != null) {
+				let info = `<button id="next${res["nextPageToken"]}" type="button" class="btn btn-danger">Next</button>`;
+				$("#videos").append(info);
+			}
 		}
 	})	
 });
